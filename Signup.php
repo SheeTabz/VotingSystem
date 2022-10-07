@@ -1,5 +1,16 @@
 <?php
 
+
+    //connecting to the database
+    // $dbconnect = mysqli_connect(server, username, password, database);
+    $dbconnect = mysqli_connect('localhost', 'Brenda', 'vote@2022', 'voting');
+
+    //check whether database connection is successful.
+    if (!$dbconnect){
+        echo "Database failed to connect ".mysqli_connect_error();
+    }
+
+
     if(isset($_POST['save'])){    //if the button save is clicked do the following
     //Here we pass the name of the input button to the global variable _POST[] and picking data from form.
         
@@ -63,7 +74,6 @@
     }
     else{
         $password = htmlspecialchars($password);
-        // $password = test_input($_POST["password"]);
         if (strlen($password) < 8) {
             $passwordErr = "Your Password Must Contain At Least 8 Characters!";
             $error['password'] = "<p style = 'color: red;'> ($passwordErr)</p>";
@@ -80,11 +90,22 @@
                         $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
                         $error['password'] = "<p style = 'color: red;'> ($passwordErr)</p>";
                     }
+        $password = crypt("password", "2020");
+                   
     if(array_filter($error)) {
-        $error['general'] = "<p style = 'color: red;'>Please sort the above errors you can proceed";
+        $error['general'] = "<p style = 'color: red;'>Please sort the above errors you can proceed</p>";
     }
     else{
-        $success = "<p style = 'color: green;'>Successful Sign up. You can now login.</p>";
+        $sql = "INSERT INTO user(firstname, othernames, phone_number, email, password)
+        VALUES('$firstname', '$surname', $phonenumber, '$email', '$password')";
+
+        if ($dbconnect->query($sql)===TRUE){
+            $success = "<p style = 'color: green;'>Successful Sign up. You can now <a href='#'>login</a>.</p>";
+            // echo "New record created successfully";
+        }
+        else{
+            $error['general'] = "<p style = 'color: red;'>Error: ".$dbconnect->error."</p>";
+        }
     }    
                     
     }
@@ -174,11 +195,12 @@ body{
     bottom: -80px;
 }
 form{
-    height: 850px;
+    height: 100%;
     width: 400px;
     margin-top: 100px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
+    overflow: auto;
     transform: translate(-50%,-50%);
     top: 50%;
     left: 50%;
@@ -187,6 +209,9 @@ form{
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
+}
+form::-webkit-scrollbar {
+    display: none;
 }
 form *{
     font-family: 'Poppins',sans-serif;
@@ -231,7 +256,13 @@ input{
     font-size: 24px;
     font-weight: 600;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer;}
+.radio {
+  display: inline-flex;
+  align-items: center;
+}
+.radio-input{
+    margin: 0 0.5rem 0;
 }
 .social{
   margin-top: 30px;
@@ -255,8 +286,13 @@ input{
 .social i{
   margin-right: 4px;
 }
+input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
+}
 
-    </style>
+</style>
    
 </head>
 <body>
@@ -319,15 +355,32 @@ input{
             echo $success;
             }
         ?>
-    <div class = "button">
+        
+
+        <label for="policy">Agree to our Privacy Policy:</label>
+        <label class = "radio"><input type="radio" name="policy" id="yes" class="radio-input"onclick="show1();" required>Yes</label>
+        <label class = "radio"><input type="radio" name="policy" id="no" class="radio-input" onclick="show2();" required>No</label> 
+
+    <div class = "button" id = "button">
         <input type="submit" id="save" name ="save" value = "Sign Up">
     </div>
-        <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-        </div>
-    </form>
 
+    <div class="social">
+        <div class="go"><i class="fab fa-google"></i>  Google</div>
+        <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+    </div>
+
+
+    </form>
+<script>
+    function show1(){
+        document.getElementById('button').style.display = 'block';
+    }
+    function show2(){
+        document.getElementById('button').style.display ='none';
+    }
+    
+</script>
 
 
 
