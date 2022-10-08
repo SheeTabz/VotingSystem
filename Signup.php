@@ -1,14 +1,6 @@
 <?php
 
-
-    //connecting to the database
-    // $dbconnect = mysqli_connect(server, username, password, database);
-    $dbconnect = mysqli_connect('localhost', 'Brenda', 'vote@2022', 'voting');
-
-    //check whether database connection is successful.
-    if (!$dbconnect){
-        echo "Database failed to connect ".mysqli_connect_error();
-    }
+    require 'dbconnect.php';
 
 
     if(isset($_POST['save'])){    //if the button save is clicked do the following
@@ -90,7 +82,7 @@
                         $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
                         $error['password'] = "<p style = 'color: red;'> ($passwordErr)</p>";
                     }
-        $password = crypt("password", "2020");
+        $password = crypt("$password", "2020");
                    
     if(array_filter($error)) {
         $error['general'] = "<p style = 'color: red;'>Please sort the above errors you can proceed</p>";
@@ -390,3 +382,4 @@ input[type=radio] {
   
 </body>
 </html>
+

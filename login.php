@@ -1,4 +1,37 @@
 <?php
+  include ('dbconnect.php');
+   //pick user details from the phone
+   if(isset($_POST['login'])){    //if the button save is clicked do the following
+    //Here we pass the name of the input button to the global variable _POST[] and picking data from form.
+        
+    #Creating variables to hold the form data
+        $email = $password = '';
+        $email= $_POST['email'];
+        $password = $_POST['password'];
+    // prevent crosssite scripting
+      $email = htmlspecialchars($email);
+      $password = htmlspecialchars($password);
+    //encrypt
+      $password = crypt("$password", "2020");
+
+      //  echo "<p style = 'color:white;'> $email  $password</p>";
+
+    // Retrieve data from database
+    include 'retrieve.php';
+    // Step 1 - Write down the SQL statements
+    // Step 2 - execute the sql statement using the mysqli_query()
+    // Step 3 - Fetch the results using mysqli_fetch
+
+    //save the password from database to a variable
+    $pw_from_db = $user['password'];
+
+    if ($password == $pw_from_db){
+        echo "<p style = 'color:green;'>Login successful</p>";
+    }
+    else{
+        echo "<p style = 'color:red;'>Login unsuccessful</p>";
+    }
+  }
 
 ?>
 
@@ -93,7 +126,7 @@
                 </div>
                 <div class="hpanel">
                     <div class="panel-body">
-                        <form action="" id="loginForm">
+                        <form action="#" method="post" id="loginForm">
                             <div class="form-group">
                                 <label class="control-label" for="email">Email</label>
                                 <input type="email" placeholder="example@gmail.com" title="Please enter your email:" required="required" value="" name="email" id="email" class="form-control">
