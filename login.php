@@ -1,38 +1,28 @@
 <?php
-  include ('dbconnect.php');
+  session_start();
+
+  require ('dbconnect.php');
    //pick user details from the phone
    if(isset($_POST['login'])){    //if the button save is clicked do the following
     //Here we pass the name of the input button to the global variable _POST[] and picking data from form.
         
     #Creating variables to hold the form data
+    $email = $password= $login_success = $login_error = '';
         $email = $password = '';
         $email= $_POST['email'];
         $password = $_POST['password'];
+
     // prevent crosssite scripting
       $email = htmlspecialchars($email);
+      $email = mysqli_real_escape_string($dbconnect, $email);
       $password = htmlspecialchars($password);
-    //encrypt
-      $password = crypt("$password", "2020");
+      $password = mysqli_real_escape_string($dbconnect, $password);
 
-      //  echo "<p style = 'color:white;'> $email  $password</p>";
-
-    // Retrieve data from database
-    include 'retrieve.php';
-    // Step 1 - Write down the SQL statements
-    // Step 2 - execute the sql statement using the mysqli_query()
-    // Step 3 - Fetch the results using mysqli_fetch
-
-    //save the password from database to a variable
-    $pw_from_db = $user['password'];
-
-    if ($password == $pw_from_db){
-        echo "<p style = 'color:green;'>Login successful</p>";
-    }
-    else{
-        echo "<p style = 'color:red;'>Login unsuccessful</p>";
-    }
+      // Retrieve data from database
+      require 'retrieve.php';
   }
-
+  // close db connection
+  $dbconnect-> close();
 ?>
 
 
@@ -126,16 +116,22 @@
                 </div>
                 <div class="hpanel">
                     <div class="panel-body">
-                        <form action="#" method="post" id="loginForm">
+                        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="loginForm">
                             <div class="form-group">
                                 <label class="control-label" for="email">Email</label>
-                                <input type="email" placeholder="example@gmail.com" title="Please enter your email:" required="required" value="" name="email" id="email" class="form-control">
+                                <input type="email" placeholder="example@gmail.com" title="Please enter your email:" required="required" value="<?php if (isset($email)) {echo $email;}?>" name="email" id="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="password">Password</label>
-                                <input type="password" title="Please enter your password:" placeholder="" required="required" value="" name="password" id="password" class="form-control">
+                                <input type="password" title="Please enter your password:" placeholder="" required="required" value="<?php if (isset($password)) {echo $password;}?>" name="password" id="password" class="form-control">
                             </div>
-
+                            <?php 
+                                if(isset($login_success)):
+                                    echo $login_success;
+                                endif;
+                                if(isset($login_error)):
+                                  echo $login_error;
+                                endif;?>
                             <input type="submit" id = 'login' name="login" value="login" class="btn btn-success btn-block loginbtn"/>
                             <a class="btn btn-default btn-block" href="Signup.php">Register</a>
                         </form>

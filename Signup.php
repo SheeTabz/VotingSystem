@@ -18,7 +18,7 @@
         $error = array('fname'=> '', 'lname' => '', 'phone' => '', 'email' => '', 'password'=> '', 'general' => '');
 
         $success = '';
-    // echo ("<p style = 'color:white;'>$firstname $surname $phonenumber $email $password");
+    // echo ("<p style = 'color:yellow;'>$firstname $surname $phonenumber $email $password");
 
     //validating data
     //1.check if any data is missing
@@ -82,17 +82,17 @@
                         $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
                         $error['password'] = "<p style = 'color: red;'> ($passwordErr)</p>";
                     }
-        $password = crypt("$password", "2020");
+        $password = crypt("$password", "vote");
                    
     if(array_filter($error)) {
         $error['general'] = "<p style = 'color: red;'>Please sort the above errors you can proceed</p>";
     }
     else{
-        $sql = "INSERT INTO user(firstname, othernames, phone_number, email, password)
+        $sql = "INSERT INTO user(firstname, othernames, phone_number, email, userpassword)
         VALUES('$firstname', '$surname', $phonenumber, '$email', '$password')";
 
         if ($dbconnect->query($sql)===TRUE){
-            $success = "<p style = 'color: green;'>Successful Sign up. You can now <a href='#'>login</a>.</p>";
+            $success = "<p style = 'color: green;'>Successful Sign up. You can now <a href='login.php'>login</a>.</p>";
             // echo "New record created successfully";
         }
         else{
@@ -101,6 +101,10 @@
     }    
                     
     }
+    // Redirect
+    header('Location: login.php');
+//   msqli_close($dbconnect);
+    $dbconnect-> close();
 } 
 
 ?>
@@ -296,7 +300,7 @@ input[type=radio] {
         <div class="shape"></div>
 
     </div>
-    <form action = "signup.php" method = "post" id = "register">
+    <form action = "<?php echo $_SERVER['PHP_SELF'];?>" method = "post" id = "register">
         <h3>Sign Up</h3>
     
 <!-- $error = array('fname'=> 'lname' => 'phone' => 'email' => 'password') -->
