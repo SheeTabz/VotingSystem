@@ -1,0 +1,12 @@
+<?php
+    
+    $dbconnect = mysqli_connect('localhost', 'Brenda', 'vote@2022', 'voting');
+// function to sanitize user input data
+function sanitize($data){
+    global $dbconnect;
+    $data = htmlspecialchars($data);
+    $data = mysqli_real_escape_string($dbconnect, $data);
+    return $data;
+}
+
+?>

@@ -27,7 +27,7 @@
     }
     else{
         //2. htmlspecialchars is used to treat any tags just like any word to prevent cross site scripting attack from occuring in your site
-        $firstname= htmlspecialchars($firstname);
+        $firstname= sanitize($firstname);
         //check if there are special chars used on the name
         if(!preg_match('/^[a-z]+$/i', $firstname)){
             $error['fname'] = "<p style = 'color: red;'> Please use letter a-z on your first name!<p/>";
@@ -37,7 +37,7 @@
         $error['lname'] = "<p style = 'color: red;'> Please enter last name!<p/>";
     }
     else{
-        $surname= htmlspecialchars($surname);
+        $surname= sanitize($surname);
         if(!preg_match('/^[a-z]+$/i', $surname)){
             $error['lname'] = "<p style = 'color: red;'> Please use letter a-z on your last name!<p/>";
             }
@@ -46,7 +46,7 @@
         $error['phone'] = "<p style = 'color: red;'> Please enter phone number!<p/>";
     }
     else{
-        $phonenumber = htmlspecialchars($phonenumber);
+        $phonenumber = sanitize($phonenumber);
         
         if(strlen($phonenumber) != 10){
             $error['phone'] = "<p style = 'color: red;'> Phone number must have 10 digits only!<p/>";
@@ -56,7 +56,7 @@
         $error['email'] = "<p style = 'color: red;'> Please enter your email!<p/>";
     }
     else{
-        $email = htmlspecialchars($email);
+        $email = sanitize($email);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error['email'] = "<p style = 'color: red;'>Invalid email address ($email)</p>";
         }
@@ -65,7 +65,7 @@
         $error['password'] = "<p style = 'color: red;'> Please enter your password!<p/>";
     }
     else{
-        $password = htmlspecialchars($password);
+        $password = sanitize($password);
         if (strlen($password) < 8) {
             $passwordErr = "Your Password Must Contain At Least 8 Characters!";
             $error['password'] = "<p style = 'color: red;'> ($passwordErr)</p>";

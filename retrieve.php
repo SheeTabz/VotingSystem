@@ -11,9 +11,10 @@ $user = mysqli_fetch_assoc($result);
     
 //encrypt
 $password = crypt("$password", "vote");
+
 //save the password from database to a variable
 $pw_from_db = $user['userpassword'];
-// echo "<p style = 'color:white;'> $email.'\n'.$password.'\n'.$pw_from_db.'\n'.</p>";
+echo "<p style = 'color:white;'> $email.\t.$password.\t.$pw_from_db.\t.</p>";
 
 
 
@@ -23,10 +24,10 @@ if ($password == $pw_from_db){
   // save some user info
     $_SESSION['firstname'] = $user['firstname'];
     $_SESSION['lastname'] = $user['othernames'];
-    $_SESSION['id'] = $user['id']
-    $_SESSION['phone_number'] = $user['phone_number']
-    $_SESSION['email'] = $user['email']
-    $_SESSION['password'] = $user['userpassword']
+    $_SESSION['id'] = $user['id'];
+    $_SESSION['phone_number'] = $user['phone_number'];
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['password'] = $user['userpassword'];
 
   // Redirect
   header('Location: index.php');
@@ -37,6 +38,5 @@ $login_error =  "<p style = 'color:red;'>Login unsuccessful</p>";
 }
 // free memory space for the result set
 mysqli_free_result($result);
-
-
+  
 ?>

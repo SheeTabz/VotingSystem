@@ -2,10 +2,12 @@
   session_start();
 
   require ('dbconnect.php');
-   //pick user details from the phone
-   if(isset($_POST['login'])){    //if the button save is clicked do the following
+  require ('my_functions.php');
+  
+  //pick user details from the phone
+  if(isset($_POST['login'])){    //if the button save is clicked do the following
     //Here we pass the name of the input button to the global variable _POST[] and picking data from form.
-        
+      
     #Creating variables to hold the form data
     $email = $password= $login_success = $login_error = '';
         $email = $password = '';
@@ -13,14 +15,12 @@
         $password = $_POST['password'];
 
     // prevent crosssite scripting
-      $email = htmlspecialchars($email);
-      $email = mysqli_real_escape_string($dbconnect, $email);
-      $password = htmlspecialchars($password);
-      $password = mysqli_real_escape_string($dbconnect, $password);
+      $email = sanitize($email);
+      $password = sanitize($password);
 
       // Retrieve data from database
       require 'retrieve.php';
-  }
+   }
   // close db connection
   $dbconnect-> close();
 ?>

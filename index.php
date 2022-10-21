@@ -1,8 +1,6 @@
 <?php
-  session_start();
-
-  require ('dbconnect.php');
-
+    session_start();
+    require ('loggedin_db_connect.php');
 //   create a variable to pick up session variable
   $firstname = $_SESSION['firstname'];
   $lastname = $_SESSION['lastname'];
@@ -83,7 +81,7 @@
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                <a href="index.php"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
                 <strong><img src="img/logo/logosn.png" alt="" /></strong>
             </div>
 			<div class="nalika-profile">
@@ -103,14 +101,12 @@
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
-                            <a class="has-arrow" href="index.html">
+                            <a class="has-arrow" href="index.php">
 								   <i class="icon nalika-home icon-wrap"></i>
 								   <span class="mini-click-non">Ecommerce</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
-                                <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
-                                <li><a title="Dashboard v.3" href="index-2.html"> <span class="mini-sub-pro">Dashboard v.3</span></a></li>
+                                <li><a title="Dashboard v.1" href="index.php"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
                                 <li><a title="Product List" href="product-list.html"><span class="mini-sub-pro">Product List</span></a></li>
                                 <li><a title="Product Edit" href="product-edit.html"><span class="mini-sub-pro">Product Edit</span></a></li>
                                 <li><a title="Product Detail" href="product-detail.html"><span class="mini-sub-pro">Product Detail</span></a></li>
@@ -148,7 +144,7 @@
                                 <li><a title="Blog" href="blog.html"><span class="mini-sub-pro">Blog</span></a></li>
                                 <li><a title="Blog Details" href="blog-details.html"><span class="mini-sub-pro">Blog Details</span></a></li>
                                 <li><a title="404 Page" href="404.html"><span class="mini-sub-pro">404 Page</span></a></li>
-                                <li><a title="500 Page" href="500.html"><span class="mini-sub-pro">500 Page</span></a></li>
+                                <li><a title="500 Page" href="#"><span class="mini-sub-pro">500 Page</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -195,8 +191,8 @@
                         <li id="removable">
                             <a class="has-arrow" href="#" aria-expanded="false"><i class="icon nalika-new-file icon-wrap"></i> <span class="mini-click-non">Pages</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Login" href="login.html"><span class="mini-sub-pro">Login</span></a></li>
-                                <li><a title="Register" href="register.html"><span class="mini-sub-pro">Register</span></a></li>
+                                <li><a title="Login" href="login.php"><span class="mini-sub-pro">Login</span></a></li>
+                                <li><a title="Register" href="Signup.php"><span class="mini-sub-pro">Register</span></a></li>
                                 <li><a title="Lock" href="lock.html"><span class="mini-sub-pro">Lock</span></a></li>
                                 <li><a title="Password Recovery" href="password-recovery.html"><span class="mini-sub-pro">Password Recovery</span></a></li>
                             </ul>
@@ -212,7 +208,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="index.php"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -372,7 +368,7 @@
 															<i class="icon nalika-down-arrow nalika-angle-dw"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="register.html"><span class="icon nalika-home author-log-ic"></span> Register</a>
+                                                        <li><a href="signup.php"><span class="icon nalika-home author-log-ic"></span> Register</a>
                                                         </li>
                                                         <li><a href="#"><span class="icon nalika-user author-log-ic"></span> My Profile</a>
                                                         </li>
@@ -380,7 +376,7 @@
                                                         </li>
                                                         <li><a href="#"><span class="icon nalika-settings author-log-ic"></span> Settings</a>
                                                         </li>
-                                                        <li><a href="login.html"><span class="icon nalika-unlocked author-log-ic"></span> Log Out</a>
+                                                        <li><a href="logout.php"><span class="icon nalika-unlocked author-log-ic"></span> Log Out</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -784,9 +780,7 @@
                                     <ul class="mobile-menu-nav">
                                         <li><a data-toggle="collapse" data-target="#Charts" href="#">Home <span class="admin-project-icon nalika-icon nalika-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="index.html">Dashboard v.1</a></li>
-                                                <li><a href="index-1.html">Dashboard v.2</a></li>
-                                                <li><a href="index-3.html">Dashboard v.3</a></li>
+                                                <li><a href="index.php">Dashboard v.1</a></li>
                                                 <li><a href="product-list.html">Product List</a></li>
                                                 <li><a href="product-edit.html">Product Edit</a></li>
                                                 <li><a href="product-detail.html">Product Detail</a></li>
@@ -815,7 +809,7 @@
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="blog-details.html">Blog Details</a></li>
                                                 <li><a href="404.html">404 Page</a></li>
-                                                <li><a href="500.html">500 Page</a></li>
+                                                <li><a href="#">500 Page</a></li>
                                             </ul>
                                         </li>
                                         <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Interface <span class="admin-project-icon nalika-icon nalika-down-arrow"></span></a>
@@ -898,9 +892,9 @@
                                         </li>
                                         <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages <span class="admin-project-icon nalika-icon nalika-down-arrow"></span></a>
                                             <ul id="Pagemob" class="collapse dropdown-header-top">
-                                                <li><a href="login.html">Login</a>
+                                                <li><a href="login.php">Login</a>
                                                 </li>
-                                                <li><a href="register.html">Register</a>
+                                                <li><a href="signup.php">Register</a>
                                                 </li>
                                                 <li><a href="lock.html">Lock</a>
                                                 </li>
