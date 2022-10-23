@@ -132,7 +132,7 @@
                                 if(isset($login_error)):
                                   echo $login_error;
                                 endif;?>
-                            <input type="submit" id = 'login' name="login" value="login" class="btn btn-success btn-block loginbtn"/>
+                            <input type="submit" id = 'login' name="login" value="Login" class="btn btn-success btn-block loginbtn"/>
                             <a class="btn btn-default btn-block" href="Signup.php">Register</a>
                         </form>
                     </div>

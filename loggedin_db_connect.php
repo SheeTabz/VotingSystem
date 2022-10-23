@@ -11,8 +11,7 @@
         // echo "<p style = 'color:white;'> Database connected successfully</p>";
     }
     //check whether the user is logged in.
-
-    if(!isset($_SESSION['firstname'])){
+    if(!isset($_SESSION['firstname']) && !isset($_SESSION['lastname']) && !isset($_SESSION['password'])){
         echo ("<script>window.top.location='login.php'</script>");
     }
 ?>

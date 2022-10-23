@@ -1,10 +1,22 @@
+<?php
+  session_start();
+
+  require 'loggedin_db_connect.php';
+
+  $firstname = $_SESSION['firstname'];
+  // $lastname = $_SESSION['lastname'];
+
+  require ('unlock2.php');
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Lock | Nalika - Material Admin Template</title>
+    <title>Lock</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -71,7 +83,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="back-link back-backend">
-                    <a href="index.html" class="btn btn-primary">Back to Dashboard</a>
+                    <a href="index.php" class="btn btn-primary">Back to Dashboard</a>
                 </div>
             </div>
         </div>
@@ -84,13 +96,20 @@
                     <div class="panel-body text-center lock-inner">
                         <i class="fa fa-lock" aria-hidden="true"></i>
                         <br/>
-                        <h4><span class="text-success">3:43:15 PM</span> <strong>Friday, February 27, 2015</strong></h4>
-                        <p>Your are in lock screen. Main app was shut down and you need to enter your passwor to go back to app.</p>
-                        <form action="#" class="m-t">
+                        <h4><strong>Hello <span class="text-success"><?php echo $firstname;?></span></strong></h4>
+                        <p>Your are in lock screen.<br>Main app was shut down and you need to enter your password to go back to app.</p>
+                        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method = "POST" class="m-t">
                             <div class="form-group">
-                                <input type="password" required="" placeholder="******" class="form-control">
+                                <input type="password" title="Please enter your password:" id ="password" name = "password" required="" placeholder="******" value = "<?php if (isset($password)) {echo $password;}?>" class="form-control">
                             </div>
-                            <button class="btn btn-primary block full-width" type="submit">Unlock</button>
+                            <?php 
+                                if(isset($login_success)):
+                                    echo $login_success;
+                                endif;
+                                if(isset($login_error)):
+                                  echo $login_error;
+                                endif;?>
+                            <input type="submit" id = 'login' name="login" value="Unlock" class="btn btn-primary block full-width"/>
                         </form>
                     </div>
                 </div>

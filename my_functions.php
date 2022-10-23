@@ -8,5 +8,9 @@ function sanitize($data){
     $data = mysqli_real_escape_string($dbconnect, $data);
     return $data;
 }
-
+function my_time(){
+    date_default_timezone_set('Africa/Nairobi');
+    $date = date('d-m-y h:i:s');
+    return $date;
+}
 ?>
