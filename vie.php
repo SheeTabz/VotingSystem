@@ -94,7 +94,7 @@
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
-                            <a class="" href="vie.php">
+                            <a class="" href="index.php">
 								   <i class="icon nalika-home icon-wrap"></i>
 								   <span class="mini-click-non">Vie as candidate</span>
 							</a>
@@ -338,7 +338,7 @@
 												<i class="icon nalika-home"></i>
 											</div>
 											<div class="breadcomb-ctn">
-												<h2>Dashboard</h2>
+												<h2>Register to Vie</h2>
 												<p>Welcome <?php echo $firstname; ?></p>
 											</div>
 										</div>
@@ -826,6 +826,58 @@
                 </div>
             </div>
         </div>-->
+        <!-- This is where the container of the body will go -->
+        <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list">
+                                <div class="row">
+                                    <!-- form goes here -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+                                    <div class="col-md-4 col-md-4 col-sm-4 col-xs-12">    
+                                    <div class="text-center m-b-md custom-login">
+                                            <h1 style = "color: gold;">REGISTER TO VIE</h1>
+                                        </div>
+                                        <div class="hpanel">
+                                            <div class="panel-body">
+                                                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="vieForm">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="election">Election : </label>
+                                                        <select name="election" id="election">
+                                                            <option value="1">August 8th Election</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="position">Position : </label>
+                                                        <select name="position" id="position">
+                                                            <option value="1">President</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <!-- <div class="form-group">
+                                                        <label class="control-label" for="password">Password</label>
+                                                        <input type="password" title="Please enter your password:" placeholder="" required="required" value="<?php if (isset($password)) {echo $password;}?>" name="password" id="password" class="form-control">
+                                                    </div> -->
+                                                    <?php 
+                                                        if(isset($vie_success)):
+                                                            echo $vie_success;
+                                                        endif;
+                                                        if(isset($vie_error)):
+                                                        echo $vie_error;
+                                                        endif;?>
+                                                    <input type="submit" id = 'vie' name="vie" value="Register" class="btn btn-success btn-block loginbtn"/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
