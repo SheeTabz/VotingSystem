@@ -42,7 +42,8 @@
                 $_SESSION['password'] = $user['userpassword'];
             
             // Redirect
-            header('Location: index.php');
+            // header('Location: index.php');
+            header( "refresh:3;url=index.php" );
             
             }
             else{

@@ -19,7 +19,7 @@
 
         $success = '';
     // echo ("<p style = 'color:yellow;'>$firstname $surname $phonenumber $email $password");
-
+        require ('my_functions.php');
     //validating data
     //1.check if any data is missing
     if(empty($firstname)){
@@ -92,7 +92,7 @@
         VALUES('$firstname', '$surname', $phonenumber, '$email', '$password')";
 
         if ($dbconnect->query($sql)===TRUE){
-            $success = "<p style = 'color: green;'>Successful Sign up. You can now <a href='login.php'>login</a>.</p>";
+            $success = "<p style = 'color: yellow;'>Successful Sign up.<br> Redirecting to login.....</p>";
             // echo "New record created successfully";
         }
         else{
@@ -102,7 +102,8 @@
                     
     }
     // Redirect
-    header('Location: login.php');
+    header( "refresh:5; url= login.php" );
+
 //   msqli_close($dbconnect);
     $dbconnect-> close();
 } 

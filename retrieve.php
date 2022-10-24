@@ -14,7 +14,7 @@ $password = crypt("$password", "vote");
 
 //save the password from database to a variable
 $pw_from_db = $user['userpassword'];
-echo "<p style = 'color:white;'> $email.\t.$password.\t.$pw_from_db.\t.</p>";
+// echo "<p style = 'color:white;'> $email.\t.$password.\t.$pw_from_db.\t.</p>";
 
 
 
@@ -30,7 +30,9 @@ if ($password == $pw_from_db){
     $_SESSION['password'] = $user['userpassword'];
 
   // Redirect
-  header('Location: index.php');
+  header( "refresh:3;url=index.php" );
+
+  // header('Location: index.php');
 
 }
 else{
